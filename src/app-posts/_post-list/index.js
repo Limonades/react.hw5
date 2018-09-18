@@ -20,7 +20,7 @@ class PostList extends React.Component {
                 {
                     this.props.isHasMore ? (
                         <div className='btn-wrap'>
-                            <a onClick={handleClick} href='#' className='btn'>
+                            <a onClick={handleClick} href='' className='btn'>
                                 Load more
                             </a>
                         </div>

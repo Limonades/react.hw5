@@ -1,7 +1,7 @@
 import React from 'react';
-import articles from '../_articles';
-import PostList from '../_post-list';
-import FillBar from '../_fill-bar';
+import articles from './../constants/articles';
+import PostList from './../components/PostList/index';
+import FillBar from './FillBar';
 
 class App extends React.Component {
 

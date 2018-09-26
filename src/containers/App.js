@@ -27,11 +27,12 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    const data = JSON.stringify(this.state.data);
-    const localData = [];
+    const { data } = this.state;
+    const localData = JSON.parse(localStorage.getItem('localData'));
+    const stateData = JSON.stringify(data);
 
     if (data.length !== localData.length) {
-      localStorage.setItem('localData', localData.concat(data));
+      localStorage.setItem('localData', stateData);
     }
   }
 

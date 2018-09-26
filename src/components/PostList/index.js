@@ -29,4 +29,10 @@ class PostList extends React.Component {
   }
 }
 
+PostList.propTypes = {
+  cards: PropTypes.array.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  isHasMore: PropTypes.bool.isRequired,
+};
+
 export default PostList;

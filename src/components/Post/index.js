@@ -21,10 +21,11 @@ Post.propTypes = {
   author: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
+  addedClass: PropTypes.string,
 };
 
 Post.defaultProps = {
-  addedClass: 'user-post',
+  addedClass: null,
 };
 
 export default Post;

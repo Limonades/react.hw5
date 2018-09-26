@@ -11,12 +11,13 @@ class FillBar extends React.Component {
       title: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.clearBar = this.clearBar.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // console.log(this);
+    // this.handleChange = this.handleChange.bind(this);
+    // this.clearBar = this.clearBar.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = e => {
     const { name, value } = e.target;
     if (name === 'title') {
       this.setState({
@@ -41,7 +42,7 @@ class FillBar extends React.Component {
         text: value,
       });
     }
-  }
+  };
 
   clearBar() {
     this.setState({
@@ -112,17 +113,18 @@ class FillBar extends React.Component {
               // required
             />
           </label>
-          <div>
+          <label htmlFor="hyu">
             Short Desription
             <textarea
+              id="hyu"
               onChange={this.handleChange}
               className="text-field"
               value={text}
               name="text"
               // required
             />
-          </div>
-          <button type="button" className="form-btn">
+          </label>
+          <button type="submit" className="form-btn">
             save
           </button>
         </form>

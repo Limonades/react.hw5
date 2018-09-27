@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class FillBar extends React.Component {
   constructor(props) {
@@ -10,11 +11,6 @@ class FillBar extends React.Component {
       author: '',
       title: '',
     };
-
-    // console.log(this);
-    // this.handleChange = this.handleChange.bind(this);
-    // this.clearBar = this.clearBar.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = e => {
@@ -44,18 +40,10 @@ class FillBar extends React.Component {
     }
   };
 
-  clearBar() {
-    this.setState({
-      text: '',
-      year: '',
-      author: '',
-      title: '',
-    });
-  }
-
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     const { createArticle } = this.props;
+    console.log(createArticle);
     const { year, author, title, text } = this.state;
 
     const newArticle = {
@@ -70,7 +58,16 @@ class FillBar extends React.Component {
     createArticle(newArticle);
 
     this.clearBar();
-  }
+  };
+
+  clearBar = () => {
+    this.setState({
+      text: '',
+      year: '',
+      author: '',
+      title: '',
+    });
+  };
 
   render() {
     const { title, author, text, year } = this.state;
@@ -113,17 +110,16 @@ class FillBar extends React.Component {
               // required
             />
           </label>
-          <label htmlFor="hyu">
+          <div>
             Short Desription
             <textarea
-              id="hyu"
               onChange={this.handleChange}
               className="text-field"
               value={text}
               name="text"
               // required
             />
-          </label>
+          </div>
           <button type="submit" className="form-btn">
             save
           </button>
@@ -133,5 +129,9 @@ class FillBar extends React.Component {
     );
   }
 }
+
+FillBar.propTypes = {
+  createArticle: PropTypes.func.isRequired,
+};
 
 export default FillBar;

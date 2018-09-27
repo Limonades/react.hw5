@@ -13,9 +13,6 @@ class App extends React.Component {
       counter: 2,
       isHasMore: true,
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.createArticle = this.createArticle.bind(this);
   }
 
   componentDidMount() {
@@ -30,11 +27,40 @@ class App extends React.Component {
     const { data } = this.state;
     const localData = JSON.parse(localStorage.getItem('localData'));
     const stateData = JSON.stringify(data);
+    if (!localData) {
+      return localStorage.setItem('localData', stateData);
+    }
 
     if (data.length !== localData.length) {
       localStorage.setItem('localData', stateData);
     }
   }
+
+  handleClick = e => {
+    e.preventDefault();
+    const { counter, data } = this.state;
+    const step = counter + 2;
+
+    this.setState({
+      cards: data.slice(0, step),
+      counter: step,
+    });
+
+    this.checkArticlesCount();
+  };
+
+  createArticle = article => {
+    const { data, counter } = this.state;
+    const newLocalArticles = data;
+    newLocalArticles.unshift(article);
+
+    this.setState({
+      data: newLocalArticles,
+      cards: newLocalArticles.slice(0, counter),
+    });
+
+    this.checkArticlesCount(true);
+  };
 
   checkArticlesCount(x) {
     const { data, counter } = this.state;
@@ -48,32 +74,6 @@ class App extends React.Component {
     return counter + 2 >= data.length
       ? this.setState({ isHasMore: false })
       : this.setState({ isHasMore: true });
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    const { counter, data } = this.state;
-    const step = counter + 2;
-
-    this.setState({
-      cards: data.slice(0, step),
-      counter: step,
-    });
-
-    this.checkArticlesCount();
-  }
-
-  createArticle(article) {
-    const { data, counter } = this.state;
-    const newLocalArticles = data;
-    newLocalArticles.unshift(article);
-
-    this.setState({
-      data: newLocalArticles,
-      cards: newLocalArticles.slice(0, counter),
-    });
-
-    this.checkArticlesCount(true);
   }
 
   render() {

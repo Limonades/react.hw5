@@ -19,7 +19,9 @@ class App extends React.Component {
     const localData = JSON.parse(localStorage.getItem('localData'));
 
     if (localData.length <= 2) {
-      this.setState({ isHasMore: false });
+      this.setState({
+        isHasMore: false
+      })
     }
 
     if (localData) {
@@ -85,11 +87,21 @@ class App extends React.Component {
       cards: newLocalArticles.slice(0, counter),
     });
 
-    this.checkArticlesCount();
+    console.log(data.length);
+
+    if (data.length > 2) {
+      this.setState({
+        isHasMore: true,
+      });
+    }
+
+    this.checkArticlesCount(true);
   };
 
   checkArticlesCount(x) {
     const { data, counter } = this.state;
+
+    console.log(data.length);
 
     if (x) {
       return counter + 1 > data.length

@@ -18,6 +18,10 @@ class App extends React.Component {
   componentDidMount() {
     const localData = JSON.parse(localStorage.getItem('localData'));
 
+    if (localData.length <= 2) {
+      this.setState({ isHasMore: false });
+    }
+
     if (localData) {
       this.setState({ data: localData, cards: localData.slice(0, 2) });
     }
@@ -25,6 +29,7 @@ class App extends React.Component {
 
   componentDidUpdate() {
     const { data } = this.state;
+
     const localData = JSON.parse(localStorage.getItem('localData'));
     const stateData = JSON.stringify(data);
     if (!localData) {
@@ -37,7 +42,7 @@ class App extends React.Component {
   }
 
   handleRemove = e => {
-    const { data } = this.state;
+    const { data, counter } = this.state;
     const copyData = data.slice();
     const dataId = [];
 
@@ -51,8 +56,10 @@ class App extends React.Component {
 
     this.setState({
       data: copyData,
-      cards: copyData.slice(0, 2),
+      cards: copyData.slice(0, counter),
     });
+
+    this.checkArticlesCount();
   };
 
   handleClick = e => {
@@ -78,7 +85,7 @@ class App extends React.Component {
       cards: newLocalArticles.slice(0, counter),
     });
 
-    this.checkArticlesCount(true);
+    this.checkArticlesCount();
   };
 
   checkArticlesCount(x) {

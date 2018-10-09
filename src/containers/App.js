@@ -36,6 +36,25 @@ class App extends React.Component {
     }
   }
 
+  handleRemove = e => {
+    const { data } = this.state;
+    const copyData = data.slice();
+    const dataId = [];
+
+    copyData.forEach(a => {
+      dataId.push(a.id);
+    });
+
+    const index = dataId.indexOf(e);
+
+    copyData.splice(index, 1);
+
+    this.setState({
+      data: copyData,
+      cards: copyData.slice(0, 2),
+    });
+  };
+
   handleClick = e => {
     e.preventDefault();
     const { counter, data } = this.state;
@@ -80,7 +99,12 @@ class App extends React.Component {
     const { cards, isHasMore } = this.state;
     return (
       <div>
-        <PostList isHasMore={isHasMore} cards={cards} handleClick={this.handleClick} />
+        <PostList
+          isHasMore={isHasMore}
+          cards={cards}
+          handleClick={this.handleClick}
+          handleRemove={this.handleRemove}
+        />
         <FillBar createArticle={this.createArticle} />
       </div>
     );

@@ -4,7 +4,7 @@ import Post from '../Post/index';
 
 class PostList extends React.Component {
   render() {
-    const { cards, handleClick, isHasMore } = this.props;
+    const { cards, handleClick, isHasMore, handleRemove } = this.props;
     return (
       <section>
         {cards.map(post => (
@@ -15,6 +15,8 @@ class PostList extends React.Component {
             text={post.text}
             year={post.year}
             addedClass={post.addedClass}
+            handleRemove={handleRemove}
+            id={post.id}
           />
         ))}
         {isHasMore ? (
@@ -33,6 +35,7 @@ PostList.propTypes = {
   cards: PropTypes.array.isRequired,
   handleClick: PropTypes.func.isRequired,
   isHasMore: PropTypes.bool.isRequired,
+  handleRemove: PropTypes.func.isRequired,
 };
 
 export default PostList;

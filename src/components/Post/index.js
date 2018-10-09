@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Post extends React.Component {
+  handleClick = () => {
+    const { id, handleRemove } = this.props;
+    handleRemove(id);
+  };
+
   render() {
     const { title, author, text, year, addedClass } = this.props;
     return (
@@ -11,6 +16,9 @@ class Post extends React.Component {
           from {author}, {year}
         </h3>
         <p>{text}</p>
+        <button onClick={this.handleClick} className="btn-close" type="button">
+          Remove
+        </button>
       </article>
     );
   }
@@ -22,6 +30,8 @@ Post.propTypes = {
   text: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
   addedClass: PropTypes.string,
+  handleRemove: PropTypes.func.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Post.defaultProps = {
